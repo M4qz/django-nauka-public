@@ -1,0 +1,9 @@
+<html>
+  <body>
+    <h1>Liczba odwiedzin tej strony: {{ counter }}</h1>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Wyloguj</button>
+    </form>
+  </body>
+</html>

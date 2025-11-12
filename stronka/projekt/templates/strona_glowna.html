@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Projekt{% endblock %}</title>
+    <link id="dynamic-stylesheet-font" rel="stylesheet" href="{% static 'czcionka.css' %}">
+    {% block css %}
+    <link id="dynamic-stylesheet" rel="stylesheet" href="{% static 'strona_glowna.css' %}">
+    {% endblock %}
+</head>
+<body>
+    <!-- Page Header -->
+    <div class="header">
+        {% block header %}
+        <h1>{{ bomboclat|title }}</h1> <!-- dodanie |title zmienia wyrazy: 1 litera duża, reszta mała -->
+        <p>Lasciate ogni speranza voi ch'entrate</p>
+        {% endblock %}
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <a href="WFAIS.html">WFAIS</a>
+            <a href="WPIA.html">WPIA</a>
+            <a href="WZKS.html">WZKS</a>
+            <a href="WBBIB.html">WBBIB</a>
+            <a href="WGIG.html">WGIG</a>
+            <a href="Rektorzy.html">Rektorzy</a>
+        </div>
+
+        <div class="menu">
+            <a href="https://pl.wikipedia.org/wiki/Uniwersytet_Jagielloński">Wiki</a>
+            <a href="https://www.uj.edu.pl/pl">Uczelnia</a>
+            <a href="https://fais.uj.edu.pl">WFAIS</a>
+            <a href="https://www.uj.edu.pl/kontakt">Kontakt</a>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            {% block content %}
+            <h2>O Uniwersytecie Jagiellońskim</h2>
+            <p>Uniwersytet Jagielloński w Krakowie (UJ) to najstarsza uczelnia wyższa w Polsce</p>
+            <p>i jedna z najstarszych w Europie. Został założony w 1364 roku przez króla Kazimierza</p>
+            <p>Wielkiego. Jest to uczelnia o międzynarodowym prestiżu, która odgrywa kluczową rolę w</p>
+            <p>polskiej i europejskiej nauce i edukacji. Uniwersytet Jagielloński jest jednym z czołowych</p>
+            <p>ośrodków naukowych w Polsce, który posiada szeroką ofertę edukacyjną, obejmującą wszystkie</p>
+            <p>najważniejsze dziedziny nauki – od humanistyki po nauki przyrodnicze, medycynę, prawo, ekonomię</p>
+            <p>i nauki społeczne. UJ w Krakowie to także ośrodek życia akademickiego, kulturalnego i intelektualnego,</p>
+            <p>którego studenci mają dostęp do licznych inicjatyw naukowych, artystycznych oraz wydarzeń kulturalnych.</p>
+            <p>Uniwersytet współpracuje z innymi uczelniami i ośrodkami badawczymi na całym świecie. Jako</p>
+            <p>uczelnia o długiej tradycji, Uniwersytet Jagielloński nie tylko kształci młode pokolenia, ale także wpływa</p>
+            <p>na rozwój kultury i nauki na poziomie krajowym i międzynarodowym.</p>
+            <img src="images/Herb_Uniwersytetu_Jagiellońskiego.png" alt="Herb Uniwersytetu Jagiellońskiego" class="herb">
+            <img src="images/building.png" alt="Zdjęcie budynku Uniwersytetu Jagiellońskiego">
+            <img src="images/11zon_resized.jfif" alt="Stare zdjęcie budynku Collegium Maius">
+            {% endblock %}
+        </div>
+       <form action="{% url 'strona' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Zatwierdź</button>
+    {% for field in form %}
+        <div class="form-control {% if field.errors %}errors{% endif %}">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+        </div>
+    {% endfor %}
+</form>
+
+        <!-- Footer -->
+        <div class="footer">
+            {% block footer %}
+            <p>&copy; 2025 Maksymilian Brzostowski - Wszelkie prawa zastrzeżone</p>
+            <p><a href="{% url 'strona'%}">Ta sama strona</a> | <a href="https://github.com/M4qz">Kontakt</a></p>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

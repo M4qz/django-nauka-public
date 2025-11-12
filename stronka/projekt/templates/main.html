@@ -1,0 +1,35 @@
+{% extends "strona_glowna.html" %}
+
+{% block title %}
+Strona Główna
+{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block  header %}
+<h1>Witamy na stronie głównej!</h1>
+{% endblock %}
+
+{% block content %}
+<p>To jest treść strony głównej, która nadpisuje domyślną treść.</p>
+<p>Jest to zmienna podstrony strona użyta w inheritance przez dziedziczenie template: {{ strona }}</p>
+{% endblock %}
+
+{% block footer %}
+<p>To dynamicznie napisalem</p>
+    <form method="POST">
+        {% csrf_token %}
+         {% if is_valid is False %}
+        <p>Wprowadziłeś zle: {{is_valid}}</p>
+    {% elif is_valid is True %}
+        <p>Wprowadziłeś dobrze:{{strona_bs}}</p>
+        {% endif %}
+        <form action="/" method="post">
+    <label for="name">Imię:</label>
+    <input id="name" name="strona" type="text" autocomplete="off">
+    <button>OK</button>
+        </form>
+</form>
+{{ block.super }}
+{% endblock %}
+

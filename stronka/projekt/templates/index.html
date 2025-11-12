@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Klubów</title>
+</head>
+<body>
+    <h1>Lista Klubów</h1>
+    <ul>
+        {% for club, description in clubs.items %}
+            <li>
+                 <!-- mozna sobie tutaj po prostu tak jak za pomoca reverse dac skrot linku przy href -->
+                 <a href="{% url 'month-challenge' club %}">{{ club|title }}</a>:
+                 {% if description %}<!-- if description to jak w pythonie sprawdza czy wogole inne niz none-->
+                 {{ description }}
+                 {% else %}
+                 jeszcze nie w laliga
+                 {% endif %}
+            </li>
+            {% endfor %}
+    </ul>
+
+    <h1>Lista Ksiazek</h1>
+    <ul>
+          {% for book in books %}
+             <li>
+            Tytuł: <a href="{% url 'index' book.slug %}">{{ book.title }}</a>,
+            Autor: {{ book.author }},
+            Data publikacji: {{ book.published_date }},
+            Wiek: {{ book.age }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
